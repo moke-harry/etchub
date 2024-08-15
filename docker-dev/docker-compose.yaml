@@ -1,0 +1,60 @@
+# # docker run config
+
+# # network config
+# networks:
+#   backend:
+#     driver: ${NETWORKS_DRIVER}
+
+# # 服务容器配置
+# services:
+#   nginx:
+#     build:
+#       context: ./nginx
+#     volumes:
+#       - ../etc/nginx/:/etc/nginx/
+#     ports:
+#       - "${HTTP_PORT}:80"
+#       - "${HTTPS_PORT}:443"
+#     networks:
+#       - backend
+#     restart: always
+
+#   backend:
+#     command: run services/backend/bin/main
+#     networks:
+#       - backend
+#     restart: always
+
+#   # node:
+#   #   build: ./node
+    
+#   # mysql config
+#   mysql:
+#     build:
+#       context:  ./mysql
+#     environment:
+#       - TZ=${TZ}
+#       - MYSQL_USER=${MYSQL_USERNAME}                  # 设置 Mysql 用户名称
+#       - MYSQL_PASSWORD=${MYSQL_PASSWORD}              # 设置 Mysql 用户密码
+#       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}    # 设置 Mysql root 用户密码
+#     volumes:
+#       - ${DATA_PATH_HOST}/mysql:/var/lib/mysql        # 引用 .env 配置中 DATA_PATH_HOST 变量，将宿主机上存放 Mysql 数据的目录挂载到容器中 /var/lib/mysql 目录
+#     ports:
+#       - "${MYSQL_PORT}:3306"                          # 设置容器3306端口映射指定宿主机端口
+#     networks:
+#       - backend
+#     restart: always
+
+
+#   # etcd:                                  
+#   #   build:
+#   #     context: ./etcd                    
+#   #   environment:
+#   #     - TZ=${TZ}
+#   #     - ALLOW_NONE_AUTHENTICATION=yes
+#   #     - ETCD_ADVERTISE_CLIENT_URLS=http://etcd:2379
+#   #   ports:                               
+#   #     - "${ETCD_PORT}:2379"
+#   #   networks:
+#   #     - backend
+#   #   restart: always
